@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta http-equiv="content-type" content="text/html" charset="UTF-8" >
+<!--        <link rel="stylesheet" href="css/bootstrap.min.css" >-->
+    <!--    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">-->
+        <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>-->
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <title>User list</title>
+
+    </head>
+
+    <body>
+    <div class="container">
+        <th:block th:replace="layout/sidebar.html"></th:block>
+        <div>
+            <h1 style="text-align: center;">Manage Students</h1>
+
+            <div th:if="${success}" class="row alert alert-success alert-dismissible" >
+                <span th:text="${success}"></span>
+            </div>
+            <a href="/add" class="btn btn-success">Add</a>
+            <table class="table table-active">
+                <tr>
+                    <th>First Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Actions</th>
+                </tr>
+                <block th:each="students : ${student}">
+                    <tr>
+                        <td th:text="${students.name}"></td>
+                        <td th:text="${students.email}"></td>
+                        <td th:text="${students.phone}"></td>
+                        <td>
+                            <a class="btn btn-primary" th:href="@{'/edit?id='+${students.id}}">Edit</a>
+                            <a class="btn btn-danger" th:href="@{'/delete?id='+${students.id}}">Del</a>
+                        </td>
+                    </tr>
+                </block>
+
+            </table>
+
+            <ul class="pagination">
+                <li><a>Tổng Trang: [[${totalItems}]]</a></li>
+                <li><a th:if="${currentPage > 1}" th:href="@{'/page/'+ ${currentPage - 1}}">prive</a>
+                    <span th:each="i: ${#numbers.sequence(1, totalPages )}">
+                        <a th:if="${currentPage != i}" th:href="@{'/page/'+ ${i}}" > [[${i}]]</a>
+                        <span th:unless="${currentPage != i}"> [[${i}]]</span>
+                    </span>
+                </li>
+
+                <li><a th:if="${currentPage < totalPages}" th:href="@{'/page/'+ ${currentPage + 1}}">Next</a>
+                    <span th:unless="${currentPage < totalPages}"> Next</span>
+                </li>
+
+                <li><a th:if="${currentPage < totalPages}" th:href="@{'/page/'+ ${currentPage}}">Last</a>
+                    <span th:unless="${currentPage < totalPages}"> Last</span>
+                </li>
+            </ul>
+
+        </div>
+
+    </div>
+    </body>
+</html>

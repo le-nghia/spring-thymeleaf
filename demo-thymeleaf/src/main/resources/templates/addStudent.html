@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <title>New</title>
+</head>
+<body>
+    <div class="col-3"></div>
+    <div class="container col-6">
+
+        <!-- Add header vao day -->
+        <th:block th:replace="layout/sidebar.html"></th:block>
+
+        <h1>New</h1>
+        <div class="col-md-auto">
+            <form th:object="${student}" th:action="@{/save}" action="#" method="post">
+
+                <div>
+                    <label th:text="name" th:for="name"></label>
+                    <input type="text" th:field="*{name}" class="form-control" placeholder="name">
+                    <span th:if="${#fields.hasErrors('name')}" th:onerror="*{name}" >Vui long nhap ten</span>
+                </div>
+                <div style="clear: both; display: block; height: 10px;" ></div>
+
+                <div>
+                    <label th:text="email" th:for="email"></label>
+                    <input type="text" th:field="*{email}" class="form-control" placeholder="email">
+                    <span th:if="${#fields.hasErrors('email')}" th:onerror="*{email}" >Vui long nhap email</span>
+                </div>
+                <div style="clear: both; display: block; height: 10px;" ></div>
+
+                <div>
+                    <label th:text="phone" th:for="phone"></label>
+                    <input type="text" th:field="*{phone}" class="form-control" placeholder="phone">
+                    <span th:if="${#fields.hasErrors('phone')}" th:onerror="*{name}" >Vui long nhap phone</span>
+                </div>
+                <div style="clear: both; display: block; height: 10px;" ></div>
+
+                <input type="submit" class="btn btn-success" value="Save">
+                <button type="button" th:href="@{/}"> Back </button>
+
+            </form>
+        </div>
+    </div>
+</body>
+</html>

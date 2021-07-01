@@ -1,0 +1,20 @@
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Index</a>
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Home</a> </li>
+        <li> <a href="#">page 1</a> </li>
+        <li> <a href="#">page 2</a> </li>
+      </ul>
+    </div>
+    <!--                 Tim kiem user theo ID -->
+    <form class="navbar-form navbar-right" th:action="@{/findid}" method="post">
+      <div class="form-group">
+        <input type="text" class="form-control" name="keyword" id="keyword"
+               size="50" th:value="${keyword}" />
+      </div>
+      <input type="submit" class="btn btn-default" value="search" />
+    </form>
+  </div>
+</nav>
